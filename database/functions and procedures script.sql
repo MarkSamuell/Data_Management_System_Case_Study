@@ -278,5 +278,24 @@ BEGIN
   -- For Toad: Highlight column DID
   :new.DID := DEPARTMENTS_SEQ.nextval;
 END DEPARTMENTS_TRG;
+---------------------------
 
-select * from departments;
+-- sequence trigger pair for course id 
+-- Sequence
+CREATE  SEQUENCE SCHOOL.COURSES_SEQ
+START WITH 33
+  MAXVALUE 999999999999999999999999999
+  MINVALUE 1
+  NOCYCLE
+  CACHE 20
+  NOORDER;
+-- Trigger
+CREATE or replace TRIGGER SCHOOL.COURSES_TRG
+BEFORE INSERT
+ON SCHOOL.COURSES
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+  -- For Toad: Highlight column DID
+  :new.CID := COURSES_SEQ.nextval;
+END COURSES_TRG;

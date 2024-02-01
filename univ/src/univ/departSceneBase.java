@@ -4,20 +4,24 @@ import dataAccessLayer.DataAccessLayer;
 import static dataAccessLayer.DataAccessLayer.fetchCoursesFromDatabase;
 import static dataAccessLayer.DataAccessLayer.fetchStudentsByCourse;
 import static dataAccessLayer.DataAccessLayer.fetchStudentsFromDatabase;
+import static dataAccessLayer.DataAccessLayer.getAllCourses;
 import static dataAccessLayer.DataAccessLayer.getAllDepartments;
 import dto.Course;
 import dto.Student;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
@@ -44,11 +48,11 @@ public class departSceneBase extends StackPane {
     protected final Tab tab;
     protected final AnchorPane anchorPane;
     protected final TableView<Course> Courses_Table;
-    protected final TableColumn<Course, Integer> Course_Id_Column;
-    protected final TableColumn<Course, String> Course_Name_Column;
+    protected final TableColumn<Course,Integer> Course_Id_Column;
+    protected final TableColumn<Course,String> Course_Name_Coulmn;
     protected final TableView<Student> Student_Table;
-    protected final TableColumn<Student, Integer> Student_Id_Column;
-    protected final TableColumn<Student, String> Student_Name_Column;
+    protected final TableColumn<Student,Integer> Student_Id_Column;
+    protected final TableColumn<Student,String> Student_Name_Column;
     protected final Button searchSearchBtn;
     protected final MenuButton departmentSearchList;
     protected final TextField searchDepartmentTxt;
@@ -72,15 +76,13 @@ public class departSceneBase extends StackPane {
     protected final AnchorPane anchorPane2;
     protected final Text text5;
     protected final Text text6;
-    protected final TextField deleteDepartmentIdTxt;
-    protected final Button deleteDepartmentIdSearchBtn;
     protected final TextField deleteDepartmentNameTxt;
     protected final Button deleteDepartmentBtn;
     protected final Text text7;
-    protected final TextField deleteCourseIdTxt;
-    protected final Button deleteCourseIdSearchBtn;
     protected final TextField deleteCourseNameTxt;
     protected final Button deleteCourseBtn;
+    protected final MenuButton deleteDepartList;
+    protected final MenuButton deleteCourseList;
     protected final Button mainMenuBtn;
 
     public departSceneBase() throws SQLException {
@@ -92,7 +94,7 @@ public class departSceneBase extends StackPane {
         anchorPane = new AnchorPane();
         Courses_Table = new TableView();
         Course_Id_Column = new TableColumn();
-        Course_Name_Column = new TableColumn();
+        Course_Name_Coulmn = new TableColumn();
         Student_Table = new TableView();
         Student_Id_Column = new TableColumn();
         Student_Name_Column = new TableColumn();
@@ -119,15 +121,13 @@ public class departSceneBase extends StackPane {
         anchorPane2 = new AnchorPane();
         text5 = new Text();
         text6 = new Text();
-        deleteDepartmentIdTxt = new TextField();
-        deleteDepartmentIdSearchBtn = new Button();
         deleteDepartmentNameTxt = new TextField();
         deleteDepartmentBtn = new Button();
         text7 = new Text();
-        deleteCourseIdTxt = new TextField();
-        deleteCourseIdSearchBtn = new Button();
         deleteCourseNameTxt = new TextField();
         deleteCourseBtn = new Button();
+        deleteDepartList = new MenuButton();
+        deleteCourseList = new MenuButton();
         mainMenuBtn = new Button();
 
         setMaxHeight(USE_PREF_SIZE);
@@ -168,10 +168,10 @@ public class departSceneBase extends StackPane {
         Course_Id_Column.setPrefWidth(260.0);
         Course_Id_Column.setText("Course ID");
 
-        Course_Name_Column.setEditable(false);
-        Course_Name_Column.setMinWidth(0.0);
-        Course_Name_Column.setPrefWidth(255.0);
-        Course_Name_Column.setText("Course Name");
+        Course_Name_Coulmn.setEditable(false);
+        Course_Name_Coulmn.setMinWidth(0.0);
+        Course_Name_Coulmn.setPrefWidth(255.0);
+        Course_Name_Coulmn.setText("Course Name");
 
         Student_Table.setLayoutX(512.0);
         Student_Table.setLayoutY(281.0);
@@ -326,11 +326,13 @@ public class departSceneBase extends StackPane {
         addCourseBtn.setTextFill(javafx.scene.paint.Color.valueOf("#0e5fe1"));
         addCourseBtn.setFont(new Font("Impact", 13.0));
 
+        addCourseDepartmentTxt.setAlignment(javafx.geometry.Pos.CENTER);
         addCourseDepartmentTxt.setEditable(false);
         addCourseDepartmentTxt.setLayoutX(299.0);
         addCourseDepartmentTxt.setLayoutY(342.0);
         addCourseDepartmentTxt.setPrefHeight(25.0);
         addCourseDepartmentTxt.setPrefWidth(166.0);
+        addCourseDepartmentTxt.setFont(new Font(15.0));
 
         anchorPane2.setMinHeight(0.0);
         anchorPane2.setMinWidth(0.0);
@@ -346,34 +348,22 @@ public class departSceneBase extends StackPane {
         text5.setFont(new Font("Impact", 27.0));
 
         text6.setFill(javafx.scene.paint.Color.valueOf("#ae1313"));
-        text6.setLayoutX(67.0);
-        text6.setLayoutY(148.0);
+        text6.setLayoutX(79.0);
+        text6.setLayoutY(147.0);
         text6.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         text6.setStrokeWidth(0.0);
-        text6.setText("Department ID");
+        text6.setText("Departments");
         text6.setUnderline(true);
         text6.setWrappingWidth(122.0);
         text6.setFont(new Font("Impact", 18.0));
 
-        deleteDepartmentIdTxt.setAlignment(javafx.geometry.Pos.CENTER);
-        deleteDepartmentIdTxt.setLayoutX(197.0);
-        deleteDepartmentIdTxt.setLayoutY(127.0);
-        deleteDepartmentIdTxt.setPrefHeight(25.0);
-        deleteDepartmentIdTxt.setPrefWidth(166.0);
-        deleteDepartmentIdTxt.setPromptText("enter id");
-
-        deleteDepartmentIdSearchBtn.setLayoutX(386.0);
-        deleteDepartmentIdSearchBtn.setLayoutY(127.0);
-        deleteDepartmentIdSearchBtn.setMnemonicParsing(false);
-        deleteDepartmentIdSearchBtn.setText("Search");
-        deleteDepartmentIdSearchBtn.setTextFill(javafx.scene.paint.Color.valueOf("#1854eb"));
-        deleteDepartmentIdSearchBtn.setFont(new Font("Impact", 12.0));
-
+        deleteDepartmentNameTxt.setAlignment(javafx.geometry.Pos.CENTER);
         deleteDepartmentNameTxt.setEditable(false);
         deleteDepartmentNameTxt.setLayoutX(157.0);
         deleteDepartmentNameTxt.setLayoutY(171.0);
         deleteDepartmentNameTxt.setPrefHeight(25.0);
         deleteDepartmentNameTxt.setPrefWidth(224.0);
+        deleteDepartmentNameTxt.setFont(new Font(15.0));
 
         deleteDepartmentBtn.setLayoutX(201.0);
         deleteDepartmentBtn.setLayoutY(227.0);
@@ -383,41 +373,47 @@ public class departSceneBase extends StackPane {
         deleteDepartmentBtn.setFont(new Font("Arial Black", 12.0));
 
         text7.setFill(javafx.scene.paint.Color.valueOf("#ae1313"));
-        text7.setLayoutX(58.0);
-        text7.setLayoutY(361.0);
+        text7.setLayoutX(97.0);
+        text7.setLayoutY(374.0);
         text7.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         text7.setStrokeWidth(0.0);
-        text7.setText("Course ID");
+        text7.setText("Courses");
         text7.setUnderline(true);
         text7.setWrappingWidth(122.0);
         text7.setFont(new Font("Impact", 18.0));
 
-        deleteCourseIdTxt.setAlignment(javafx.geometry.Pos.CENTER);
-        deleteCourseIdTxt.setLayoutX(188.0);
-        deleteCourseIdTxt.setLayoutY(340.0);
-        deleteCourseIdTxt.setPrefHeight(25.0);
-        deleteCourseIdTxt.setPrefWidth(166.0);
-        deleteCourseIdTxt.setPromptText("enter id");
-
-        deleteCourseIdSearchBtn.setLayoutX(377.0);
-        deleteCourseIdSearchBtn.setLayoutY(340.0);
-        deleteCourseIdSearchBtn.setMnemonicParsing(false);
-        deleteCourseIdSearchBtn.setText("Search");
-        deleteCourseIdSearchBtn.setTextFill(javafx.scene.paint.Color.valueOf("#1854eb"));
-        deleteCourseIdSearchBtn.setFont(new Font("Impact", 12.0));
-
+        deleteCourseNameTxt.setAlignment(javafx.geometry.Pos.CENTER);
         deleteCourseNameTxt.setEditable(false);
         deleteCourseNameTxt.setLayoutX(148.0);
-        deleteCourseNameTxt.setLayoutY(384.0);
+        deleteCourseNameTxt.setLayoutY(402.0);
         deleteCourseNameTxt.setPrefHeight(25.0);
         deleteCourseNameTxt.setPrefWidth(224.0);
+        deleteCourseNameTxt.setFont(new Font(12.0));
 
         deleteCourseBtn.setLayoutX(218.0);
-        deleteCourseBtn.setLayoutY(440.0);
+        deleteCourseBtn.setLayoutY(458.0);
         deleteCourseBtn.setMnemonicParsing(false);
         deleteCourseBtn.setText("Delete Course");
         deleteCourseBtn.setTextFill(javafx.scene.paint.Color.RED);
         deleteCourseBtn.setFont(new Font("Arial Black", 12.0));
+
+        deleteDepartList.setAlignment(javafx.geometry.Pos.CENTER);
+        deleteDepartList.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+        deleteDepartList.setLayoutX(193.0);
+        deleteDepartList.setLayoutY(129.0);
+        deleteDepartList.setMnemonicParsing(false);
+        deleteDepartList.setPrefHeight(25.0);
+        deleteDepartList.setPrefWidth(145.0);
+        deleteDepartList.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+
+        deleteCourseList.setAlignment(javafx.geometry.Pos.CENTER);
+        deleteCourseList.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+        deleteCourseList.setLayoutX(194.0);
+        deleteCourseList.setLayoutY(355.0);
+        deleteCourseList.setMnemonicParsing(false);
+        deleteCourseList.setPrefHeight(25.0);
+        deleteCourseList.setPrefWidth(139.0);
+        deleteCourseList.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         tab0.setContent(anchorPane0);
 
         mainMenuBtn.setLayoutX(902.0);
@@ -430,7 +426,7 @@ public class departSceneBase extends StackPane {
 
         pane.getChildren().add(imageView);
         Courses_Table.getColumns().add(Course_Id_Column);
-        Courses_Table.getColumns().add(Course_Name_Column);
+        Courses_Table.getColumns().add(Course_Name_Coulmn);
         anchorPane.getChildren().add(Courses_Table);
         Student_Table.getColumns().add(Student_Id_Column);
         Student_Table.getColumns().add(Student_Name_Column);
@@ -455,23 +451,21 @@ public class departSceneBase extends StackPane {
         splitPane.getItems().add(anchorPane1);
         anchorPane2.getChildren().add(text5);
         anchorPane2.getChildren().add(text6);
-        anchorPane2.getChildren().add(deleteDepartmentIdTxt);
-        anchorPane2.getChildren().add(deleteDepartmentIdSearchBtn);
         anchorPane2.getChildren().add(deleteDepartmentNameTxt);
         anchorPane2.getChildren().add(deleteDepartmentBtn);
         anchorPane2.getChildren().add(text7);
-        anchorPane2.getChildren().add(deleteCourseIdTxt);
-        anchorPane2.getChildren().add(deleteCourseIdSearchBtn);
         anchorPane2.getChildren().add(deleteCourseNameTxt);
         anchorPane2.getChildren().add(deleteCourseBtn);
+        anchorPane2.getChildren().add(deleteDepartList);
+        anchorPane2.getChildren().add(deleteCourseList);
         splitPane.getItems().add(anchorPane2);
         anchorPane0.getChildren().add(splitPane);
         tabPane.getTabs().add(tab0);
         pane.getChildren().add(tabPane);
         pane.getChildren().add(mainMenuBtn);
         getChildren().add(pane);
-
-   
+        
+        
         mainMenuBtn.setOnAction(e -> {
                    try {
                        new sceneController().switchToMainScene(e);
@@ -492,7 +486,17 @@ public class departSceneBase extends StackPane {
                                 
                             });
                         }
-        // ...
+// setting courses list
+        List<String> courses = getAllCourses();
+        // Clear the existing items in the course search list
+        departmentSearchList.getItems().clear();
+        // Populate the course search list with the updated courses
+             for (String course : courses) {
+                 MenuItem menuItem = new MenuItem(course);
+                 deleteCourseList.getItems().add(menuItem);
+                 menuItem.setOnAction(event -> {
+                     deleteCourseNameTxt.setText(menuItem.getText());
+             });   
 
         // Add an event handler to the "Search Departments" tab
         tab.setOnSelectionChanged(event -> {
@@ -541,13 +545,13 @@ public class departSceneBase extends StackPane {
                          Courses_Table.getColumns().add(Course_Id_Column);
                      }
 
-                     if (!Courses_Table.getColumns().contains(Course_Name_Column)) {
-                         Courses_Table.getColumns().add(Course_Name_Column);
+                     if (!Courses_Table.getColumns().contains(Course_Name_Coulmn)) {
+                         Courses_Table.getColumns().add(Course_Name_Coulmn);
                      }
 
                      // Set cell value factories for each column
                      Course_Id_Column.setCellValueFactory(cellData -> cellData.getValue().cidProperty().asObject());
-                     Course_Name_Column.setCellValueFactory(cellData -> cellData.getValue().courseNameProperty());
+                     Course_Name_Coulmn.setCellValueFactory(cellData -> cellData.getValue().courseNameProperty());
                      
                     /////////////////////////////////////////////////////////////////////////////////////////////////
                     
@@ -591,7 +595,7 @@ public class departSceneBase extends StackPane {
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////
                     
-                    Course_Name_Column.setCellFactory(col -> {
+                    Course_Name_Coulmn.setCellFactory(col -> {
                             TableCell<Course, String> cell = new TableCell<Course, String>() {
                                 protected void updateItem(String item, boolean empty) {
                                     super.updateItem(item, empty);
@@ -661,22 +665,21 @@ public class departSceneBase extends StackPane {
        
        
        addDepartmentBtn.setOnAction(e -> {
-            try {
-                String departmentName = addDepartmentTxt.getText();
+           String departmentName = addDepartmentTxt.getText(); // Handle any database exception
+            // Display an error message
+            if (departmentName.isEmpty()) {
+                // Display an alert if the department name is empty
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a department name.");
+                alert.show();
+            } else {
+               
                 
-
-                if (departmentName.isEmpty()) {
-                    // Display an alert if the department name is empty
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a department name.");
+                if (departments.contains(departmentName)) {
+                    // Display an alert if the department already exists
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Department already exists.");
                     alert.show();
                 } else {
-                    List<String> departmentsList = departments;
-
-                    if (departments.contains(departmentName)) {
-                        // Display an alert if the department already exists
-                        Alert alert = new Alert(Alert.AlertType.WARNING, "Department already exists.");
-                        alert.show();
-                    } else {
+                    try {
                         // Add the department to the database
                         Connection con = DataAccessLayer.getInstance().connect();
                         PreparedStatement pst = con.prepareStatement("INSERT INTO departments (name) VALUES (?)");
@@ -687,21 +690,189 @@ public class departSceneBase extends StackPane {
                         successAlert.show();
                         // Clear the text field after adding the department
                         addDepartmentTxt.clear();
-                        
-                    }  
+                        // update departments list
+                        try {
+                                updateDepartmentsList();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                      
                 }
-                
-            } catch (SQLException ex) {
-                // Handle any database exception
-                Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
-                // Display an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error adding department to the database.");
-                alert.show();
             }
         });
-
-
+       
+/////////////////// setting delete part
                 
+      // delete department
+                deleteDepartmentBtn.setOnAction(e -> {
+                    String departmentNameToDelete = deleteDepartmentNameTxt.getText();
+
+                    if (departmentNameToDelete.isEmpty()) {
+                        // Display an alert if the department name to delete is empty
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Please choose a department name to delete.");
+                        alert.show();
+                    } else {
+                        // Ask for user confirmation before deletion
+                        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the department?");
+                        Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+                        if (result.isPresent() && result.get() == ButtonType.OK) {
+                            try {
+                                // Connect to the database
+                                Connection con = DataAccessLayer.getInstance().connect();
+
+                                // Check if the department exists in the database
+                                PreparedStatement checkStatement = con.prepareStatement("SELECT * FROM departments WHERE name = ?");
+                                checkStatement.setString(1, departmentNameToDelete);
+                                ResultSet resultSet = checkStatement.executeQuery();
+
+                                if (resultSet.next()) {
+                                    // Department exists, proceed with deletion
+                                    PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM departments WHERE name = ?");
+                                    deleteStatement.setString(1, departmentNameToDelete);
+                                    int rowsAffected = deleteStatement.executeUpdate();
+
+                                    if (rowsAffected > 0) {
+                                        // Display a success message
+                                        updateDepartmentsList();
+                                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Department deleted successfully.");
+                                        successAlert.show();
+
+                                        // Clear the text field after deleting the department
+                                        deleteDepartmentNameTxt.clear();
+                                    } else {
+                                        // Display an error message if deletion fails
+                                        Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Failed to delete department.");
+                                        errorAlert.show();
+                                    }
+                                } else {
+                                    // Display an alert if the department does not exist
+                                    Alert alert = new Alert(Alert.AlertType.WARNING, "Department does not exist.");
+                                    alert.show();
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+                
+// delete course
+
+            deleteCourseBtn.setOnAction(e -> {
+                    String courseNameToDelete = deleteCourseNameTxt.getText();
+
+                    if (courseNameToDelete.isEmpty()) {
+                        // Display an alert if the course name to delete is empty
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Please choose a course name to delete.");
+                        alert.show();
+                    } else {
+                        // Ask for user confirmation before deletion
+                        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this course?");
+                        Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+                        if (result.isPresent() && result.get() == ButtonType.OK) {
+                            try {
+                                // Connect to the database
+                                Connection con = DataAccessLayer.getInstance().connect();
+
+                                // Check if the department exists in the database
+                                PreparedStatement checkStatement = con.prepareStatement("SELECT * FROM courses WHERE name = ?");
+                                checkStatement.setString(1, courseNameToDelete);
+                                ResultSet resultSet = checkStatement.executeQuery();
+
+                                if (resultSet.next()) {
+                                    // Department exists, proceed with deletion
+                                    PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM courses WHERE name = ?");
+                                    deleteStatement.setString(1, courseNameToDelete);
+                                    int rowsAffected = deleteStatement.executeUpdate();
+
+                                    if (rowsAffected > 0) {
+                                        // Display a success message
+                                        updateCoursesList();
+                                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Course deleted successfully.");
+                                        successAlert.show();
+
+                                        // Clear the text field after deleting the department
+                                        deleteCourseNameTxt.clear();
+                                    } else {
+                                        // Display an error message if deletion fails
+                                        Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Failed to delete course.");
+                                        errorAlert.show();
+                                    }
+                                } else {
+                                    // Display an alert if the department does not exist
+                                    Alert alert = new Alert(Alert.AlertType.WARNING, "course does not exist.");
+                                    alert.show();
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+            
+    //add course 
+    // Add an event handler to the "Add Course" button
+                // Add an event handler to the "Add Course" button
+                // Add an event handler to the "Add Course" button
+                addCourseBtn.setOnAction(e -> {
+                    String courseName = addCourseNameTxt.getText();
+                    String selectedDepartment = addCourseDepartmentTxt.getText();
+                    String courseCreditText = addCourseCreditTxt.getText();
+
+                    if (courseName.isEmpty() || selectedDepartment.isEmpty() || courseCreditText.isEmpty()) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter course name, select a department, and provide course credits.");
+                        alert.show();
+                    } else {
+                        try {
+                            // Retrieve all courses for the selected department
+                            updateCoursesList();
+
+                            // Check if the course already exists in the selected department
+                            if (courses.contains(courseName)) {
+                                Alert alert = new Alert(Alert.AlertType.WARNING, "Course already exists in the selected department.");
+                                alert.show();
+                            } else {
+                                // Parse course credits from the text field
+                                int courseCredits = Integer.parseInt(courseCreditText);
+
+                                // Add the course to the database
+                                Connection con = DataAccessLayer.getInstance().connect();
+                                PreparedStatement pst = con.prepareStatement("INSERT INTO courses (name, did, credits) VALUES (?, (SELECT did FROM departments WHERE name = ?), ?)");
+                                pst.setString(1, courseName);
+                                pst.setString(2, selectedDepartment);
+                                pst.setInt(3, courseCredits);
+                                pst.executeUpdate();
+
+                                // Display a success message
+                                Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Course added successfully.");
+                                successAlert.show();
+
+                                // Clear the text fields after adding the course
+                                addCourseNameTxt.clear();
+                                addCourseDepartmentTxt.clear();
+                                addCourseCreditTxt.clear();
+
+                                // Update the courses list
+                                updateCoursesList();
+                            }
+                        } catch (NumberFormatException ex) {
+                            // Handle the case where course credits are not a valid integer
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid number for course credits.");
+                            alert.show();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(departSceneBase.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+
+             }
+              
    }
 
        public void switchToMainScene(ActionEvent event) {
@@ -709,21 +880,50 @@ public class departSceneBase extends StackPane {
        }
    
         private void updateDepartmentsList() throws SQLException {
-         // Retrieve the updated list of departments
-         List<String> departments = getAllDepartments();
+            // Retrieve the updated list of departments
+            List<String> departments = getAllDepartments();
 
-         // Clear the existing items in the department search list
-         departmentSearchList.getItems().clear();
+            // Clear the existing items in the department search list
+            departmentSearchList.getItems().clear();
+            deleteDepartList.getItems().clear();
+            addCourseDepartmentList.getItems().clear();
+            // Populate the department search list with the updated departments
+            for (String department : departments) {
+                MenuItem menuItem = new MenuItem(department);
+                departmentSearchList.getItems().add(menuItem);
 
-         // Populate the department search list with the updated departments
-         for (String department : departments) {
-             MenuItem menuItem = new MenuItem(department);
-             departmentSearchList.getItems().add(menuItem);
+                menuItem.setOnAction(event -> {
+                    searchDepartmentTxt.setText(menuItem.getText());
+                });
+                MenuItem menuItem2 = new MenuItem(department);
+                deleteDepartList.getItems().add(menuItem2);
+                            // Add an event handler to set the selected course text to addCrsTxt
+                           menuItem2.setOnAction(event -> {
+                                   deleteDepartmentNameTxt.setText(menuItem2.getText());                            
+                 });
+                MenuItem menuItem3 = new MenuItem(department);
+                addCourseDepartmentList.getItems().add(menuItem3);
+                            // Add an event handler to set the selected course text to addCrsTxt
+                           menuItem3.setOnAction(event -> {
+                                   addCourseDepartmentTxt.setText(menuItem3.getText());                            
+                 });
 
-             menuItem.setOnAction(event -> {
-                 searchDepartmentTxt.setText(menuItem.getText());
-             });
-         }
+            }
+        }
+         
+         private void updateCoursesList() throws SQLException {
+            List<String> courses = getAllCourses();
+            // Clear the existing items in the course search list
+            deleteCourseList.getItems().clear();
+            // Populate the course search list with the updated courses
+                 for (String course : courses) {
+                     MenuItem menuItem = new MenuItem(course);
+                     deleteCourseList.getItems().add(menuItem);
+                     menuItem.setOnAction(event -> {
+                         deleteCourseNameTxt.setText(menuItem.getText());
+                 });
+
+             }
      }
 
 }
