@@ -1,0 +1,50 @@
+disk_usage: 71 GB
+-------------------------------------------------------------
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+Database backup successful. File: backup_20240201_234411.dmp
+-------------------------------------------------------------
+Database backup successful. File: backup_20240201_235039.dmp date: 20240201_235039 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_000128 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_000138 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_000232 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_000930 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_001401 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_001426 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_001649 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_001723 
+-------------------------------------------------------------
+Error: Database backup failed. date: 20240202_001759 
+-------------------------------------------------------------
+Database backup successful. File: backup_20240202_003034.dmp date: 20240202_003034 
+-------------------------------------------------------------
+disk_usage: 72 GB
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+disk_usage: 72 %
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+disk_usage: 72%  free_space: 13G GB date: Fri Feb  2 00:40:57 EST 2024
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+disk_usage: 72% | free_space:  | date: Fri Feb  2 00:42:23 EST 2024
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+disk_usage: 72% | free_space: 13GGB | date: Fri Feb  2 00:43:23 EST 2024
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
+Database backup successful. | File: backup_20240202_122518.dmp | date: Fri Feb  2 12:27:08 EST 2024 
+-------------------------------------------------------------
+Database backup successful. | File: backup_20240202_122851.dmp | date: Fri Feb  2 12:30:40 EST 2024 
+-------------------------------------------------------------
+disk_usage: 73% | free_space: 12G | date: Fri Feb  2 12:33:03 EST 2024
+Warning: Disk space usage is above 40%. Consider freeing up space.
+-------------------------------------------------------------
