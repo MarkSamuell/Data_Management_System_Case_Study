@@ -475,6 +475,7 @@ public class departSceneBase extends StackPane {
                });
         
 // setting departments list
+        
         List<String> departments = getAllDepartments();
                 for (String department : departments) {
                         MenuItem menuItem = new MenuItem(department);
@@ -489,7 +490,7 @@ public class departSceneBase extends StackPane {
 // setting courses list
         List<String> courses = getAllCourses();
         // Clear the existing items in the course search list
-        departmentSearchList.getItems().clear();
+        deleteCourseList.getItems().clear();
         // Populate the course search list with the updated courses
              for (String course : courses) {
                  MenuItem menuItem = new MenuItem(course);
@@ -879,7 +880,7 @@ public class departSceneBase extends StackPane {
 
        }
    
-        private void updateDepartmentsList() throws SQLException {
+       public void updateDepartmentsList() throws SQLException {
             // Retrieve the updated list of departments
             List<String> departments = getAllDepartments();
 
@@ -911,7 +912,7 @@ public class departSceneBase extends StackPane {
             }
         }
          
-         private void updateCoursesList() throws SQLException {
+         public void updateCoursesList() throws SQLException {
             List<String> courses = getAllCourses();
             // Clear the existing items in the course search list
             deleteCourseList.getItems().clear();

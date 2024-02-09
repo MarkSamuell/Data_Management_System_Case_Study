@@ -156,11 +156,11 @@ public class DataAccessLayer {
     public static List<String> getAllDepartments() throws SQLException {
         List<String> departments = new ArrayList<>();
         Connection con = DataAccessLayer.getInstance().connect();
-        PreparedStatement pst = con.prepareStatement("SELECT distinct name FROM departments");
+        PreparedStatement pst = con.prepareStatement("SELECT departments.name FROM school.departments");
         ResultSet rs = pst.executeQuery();
         while (rs.next()) {
-            String course = rs.getString("name");
-            departments.add(course);
+            String depart = rs.getString("name");
+            departments.add(depart);
         }
         return departments;
     }
