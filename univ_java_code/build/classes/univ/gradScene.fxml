@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="univ.sceneController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="660.0" fitWidth="1024.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@_d642b6ef-8443-4188-8799-b51a78d161c7.jpg" />
+               </image>
+            </ImageView>
+            <TabPane prefHeight="660.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Add grades">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="104.0" layoutY="86.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="297.0" layoutY="185.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="297.0" layoutY="285.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" wrappingWidth="80.2783203125">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="297.0" layoutY="378.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="297.0" layoutY="474.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Grade">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="addSearchTxt" layoutX="160.0" layoutY="58.0" opacity="0.88" prefHeight="36.0" prefWidth="150.0" promptText="enter student id">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="addSearchBtn" layoutX="209.0" layoutY="107.0" mnemonicParsing="false" text="search">
+                                 <font>
+                                    <Font name="Impact" size="12.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="addNameTxt" editable="false" layoutX="440.0" layoutY="157.0" opacity="0.88" prefHeight="37.0" prefWidth="263.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="addLevelTxt" editable="false" layoutX="441.0" layoutY="259.0" opacity="0.88" prefHeight="37.0" prefWidth="262.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="addCrsTxt" alignment="CENTER" editable="false" layoutX="622.0" layoutY="347.0" opacity="0.87" prefHeight="41.0" prefWidth="352.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <MenuButton fx:id="addCrsList" alignment="CENTER" contentDisplay="CENTER" layoutX="441.0" layoutY="348.0" mnemonicParsing="false" opacity="0.83" prefHeight="38.0" prefWidth="171.0" text="Courses list" />
+                              <MenuButton fx:id="addGradList" layoutX="441.0" layoutY="450.0" mnemonicParsing="false" opacity="0.83" prefHeight="39.0" prefWidth="83.0" text="Grades">
+                                <items>
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="A" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="B" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="C" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                  <MenuItem mnemonicParsing="false" text="D" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="F" />
+                                </items>
+                              </MenuButton>
+                              <TextField fx:id="addGradTxt" alignment="CENTER" editable="false" layoutX="546.0" layoutY="451.0" prefHeight="35.0" prefWidth="90.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="addSubmitBtn" layoutX="124.0" layoutY="547.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="217.0" text="Submit Grades" textFill="#bc1717">
+                                 <font>
+                                    <Font name="Impact" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Enroll Students">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="104.0" layoutY="86.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="316.0" layoutY="221.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="316.0" layoutY="321.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" wrappingWidth="80.2783203125">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="316.0" layoutY="414.263671875" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses">
+                                 <font>
+                                    <Font name="Impact" size="30.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="enrollSearchTxt" layoutX="160.0" layoutY="58.0" opacity="0.88" prefHeight="36.0" prefWidth="150.0" promptText="enter student id">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="enrollSearchBtn" layoutX="209.0" layoutY="107.0" mnemonicParsing="false" text="search">
+                                 <font>
+                                    <Font name="Impact" size="12.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="enrollNameTxt" editable="false" layoutX="459.0" layoutY="193.0" opacity="0.88" prefHeight="37.0" prefWidth="263.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="enrollLevelTxt" editable="false" layoutX="460.0" layoutY="295.0" opacity="0.88" prefHeight="37.0" prefWidth="262.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="enrollCrsTxt" alignment="CENTER" editable="false" layoutX="641.0" layoutY="383.0" opacity="0.87" prefHeight="41.0" prefWidth="358.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <MenuButton fx:id="enrollCrsList" alignment="CENTER" contentDisplay="CENTER" layoutX="460.0" layoutY="384.0" mnemonicParsing="false" opacity="0.83" prefHeight="38.0" prefWidth="171.0" text="Courses list" />
+                              <Button fx:id="enrollBtn" layoutX="708.0" layoutY="548.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="217.0" text="Enroll Student" textFill="#bc1717">
+                                 <font>
+                                    <Font name="Impact" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <Button layoutX="911.0" mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="29.0" prefWidth="113.0" text="Main Menu" textFill="#002bff">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

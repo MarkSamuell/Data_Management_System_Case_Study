@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="univ.sceneController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="660.0" fitWidth="1500.0" nodeOrientation="INHERIT" opacity="0.67" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@_d642b6ef-8443-4188-8799-b51a78d161c7.jpg" />
+               </image>
+            </ImageView>
+            <BorderPane prefHeight="660.0" prefWidth="1024.0">
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <Button fx:id="gradBtn" mnemonicParsing="false" onAction="#switchToGradScene" opacity="0.88" prefHeight="51.0" prefWidth="217.0" text="Grading" textFill="#9a3232" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Arial Black" size="23.0" />
+                           </font></Button>
+                     </left>
+                     <right>
+                        <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#switchToReportScene" opacity="0.88" prefHeight="51.0" prefWidth="210.0" text="Reports" textFill="#9a3232" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Arial Black" size="23.0" />
+                           </font></Button>
+                     </right>
+                     <center>
+                        <Button fx:id="stuBtn" mnemonicParsing="false" onAction="#switchToStuScene" opacity="0.88" prefHeight="51.0" prefWidth="224.0" text="Students" textFill="#9a3232" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Arial Black" size="23.0" />
+                           </font>
+                        </Button>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <bottom>
+                              <Button fx:id="DepartmnetsBtn" mnemonicParsing="false" onAction="#switchToDepartScene" opacity="0.88" prefHeight="51.0" prefWidth="201.0" text="Departments" textFill="#9a3232" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Black" size="23.0" />
+                                 </font>
+                              </Button>
+                           </bottom>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+               </center>
+               <left>
+                  <AnchorPane prefHeight="660.0" prefWidth="155.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <AnchorPane prefHeight="660.0" prefWidth="144.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+         <StackPane.margin>
+            <Insets right="1.0" />
+         </StackPane.margin>
+      </Pane>
+   </children>
+</StackPane>
