@@ -4,6 +4,8 @@
 
 This project aims to design and implement a comprehensive data management system for a university, utilizing various technologies such as SQL, PLSQL, Advanced PLSQL, Red Hat, Bash scripting, Java SE, and Object-Oriented Programming (OOP) principles. The project covers database design, SQL and PLSQL implementation, automation scripts, Java application development, and integration.
 
+[source_code](https://github.com/MarkSamuell/Data_Management_System_Case_Study/tree/main/univ_java_code/src)
+
 ## Milestones
 
 ### 1. Database Design (Day 1)
